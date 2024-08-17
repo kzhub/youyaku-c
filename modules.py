@@ -6,10 +6,9 @@ from openai import OpenAI
 def send_to_chatgpt(messages_array):
     client = OpenAI()
     client.api_key = os.getenv("OPENAI_API_KEY")
-    messages_list = messages_array.to_list() 
     response = client.chat.completions.create(
         model='gpt-4o-mini',
-        messages=messages_list
+        messages=messages_array
     )
     return response.choices[0].message.content
 
