@@ -6,6 +6,11 @@ class ChatHandler:
         self._content = parse_html(url)
         self._messages = Message()
 
+    def confirm_question(self):
+        print(self._content)
+        user_input = input('このページの内容を質問しますか (y/n): ')
+        return user_input.lower() == 'y'
+
     def ask_question(self):
         question = input('質問内容を入力してください: ')
         self._messages.add_question_message(f'{self._content}に対するユーザーの以下の質問に答えて: {question}')
