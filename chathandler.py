@@ -1,5 +1,5 @@
 from message import Message
-from modules import send_to_chatgpt, parse_html, handle_chatgpt_response
+from modules import send_to_chatgpt, parse_html
 
 class ChatHandler:
     def __init__(self, url):
@@ -15,7 +15,7 @@ class ChatHandler:
         question = input('質問内容を入力してください: ')
         self._messages.add_question_message(f'{self._content}に対するユーザーの以下の質問に答えて: {question}')
         response = send_to_chatgpt(self._messages.array)
-        handle_chatgpt_response(response, self._messages)
+        _handle_chatgpt_response(response)
 
     def handle_follow_up(self):
         while True:
@@ -24,7 +24,11 @@ class ChatHandler:
                 follow_up_question = input('質問内容を入力してください: ')
                 self._messages.add_question_message(f'{follow_up_question}')
                 response = send_to_chatgpt(self._messages.array)
-                handle_chatgpt_response(response, self._messages)
+                _handle_chatgpt_response(response)
             else:
                 print('処理を終了します。')
                 break
+
+    def _handle_chatgpt_response(response):
+        print(f'ChatGPTのレスポンス: {response}')
+        self._messages.add_res_message(f'{response}')

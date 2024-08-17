@@ -22,7 +22,3 @@ def parse_html(url):
     content = soup.get_text()  # 本文を取得
     print(f'ページの本文: {content}')
     return content
-
-def handle_chatgpt_response(response, message_history):
-    print(f'ChatGPTのレスポンス: {response}')
-    message_history.add_res_message(f'{response}')
